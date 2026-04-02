@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Salvatore Randazzo – Junior Data Analyst & AI Engineer | SAS, Python, AI & RAG Systems" />
+  <title>Salvatore Randazzo – Junior Data Analyst & AI Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ===========================
+       RESET & BASE
+    =========================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green: #1abc9c;
+      --green-dark: #16a085;
+      --green-glow: rgba(26, 188, 156, 0.35);
+      --bg: #e8e8e8;
+      --white: #ffffff;
+      --text: #1a1a1a;
+      --text-muted: #666;
+      --text-light: #999;
+      --border: #ddd;
+      --tag-bg: #f0f0f0;
+      --nav-h: auto;
+      --sidebar-w: 160px;
+      --content-max: 780px;
+      --radius: 4px;
+      --shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.65;
+      min-height: 100vh;
+    }
+
+    /* ===========================
+       STICKY HEADER / NAV
+    =========================== */
+    #site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--white);
+      box-shadow: 0 1px 6px rgba(0,0,0,0.12);
+    }
+
+    .header-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: var(--sidebar-w) 1fr;
+    }
+
+    /* Photo block */
+    .header-photo {
+      width: var(--sidebar-w);
+      overflow: hidden;
+      flex-shrink: 0;
+      align-self: stretch;
+    }
+    .header-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    /* Nav tabs grid */
+    .nav-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 1fr 1fr;
+    }
+
+    .nav-tab {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 8px 4px;
+      cursor: pointer;
+      border: none;
+      background: var(--white);
+      border-left: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text);
+      transition: background 0.2s, color 0.2s;
+      text-decoration: none;
+      line-height: 1.2;
+    }
+    /* Remove right border on last col of each row */
+    .nav-tab:nth-child(3),
+    .nav-tab:nth-child(5) { border-right: none; }
+    /* Remove bottom border on last row */
+    .nav-tab:nth-child(4),
+    .nav-tab:nth-child(5) { border-bottom: none; }
+
+    .nav-tab .tab-icon {
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    .nav-tab:hover { background: #f5f5f5; }
+    .nav-tab.active {
+      background: var(--green);
+      color: var(--white);
+      border-color: var(--green);
+    }
+    .nav-tab.active + .nav-tab { border-left-color: var(--green); }
+
+    /* Active indicator arrow */
+    .nav-tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-top: 8px solid var(--green);
+    }
+    .nav-tab { position: relative; }
+
+    /* ===========================
+       MAIN CONTENT AREA
+    =========================== */
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding-bottom: 80px;
+    }
+
+    /* Content panels */
+    .panel {
+      display: none;
+      background: var(--white);
+      margin-top: 24px;
+      padding: 56px 64px 72px;
+      border-bottom: 5px solid var(--green);
+      box-shadow:
+        0 2px 8px rgba(0,0,0,0.07),
+        0 8px 0 -3px var(--green-dark),
+        0 12px 16px -4px var(--green-glow);
+      animation: fadeIn 0.35s ease;
+    }
+    .panel.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===========================
+       SECTION HEADINGS
+    =========================== */
+    .panel-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 6vw, 3rem);
+      font-weight: 400;
+      text-align: center;
+      margin-bottom: 32px;
+      color: var(--text);
+    }
+
+    .section-label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 40px;
+    }
+    .section-label::before {
+      content: '';
+      width: 36px;
+      height: 4px;
+      background: var(--green);
+      border-radius: 2px;
+    }
+    .section-label span {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    /* ===========================
+       ABOUT / HOME PANEL
+    =========================== */
+    #panel-about .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 7vw, 3.6rem);
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    #panel-about .hero-role {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin-bottom: 48px;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-quote {
+      text-align: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text);
+      line-height: 1.9;
+      margin-bottom: 56px;
+    }
+
+    /* Info grid */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr;
+      gap: 0 32px;
+      align-items: start;
+      margin-top: 24px;
+    }
+    .info-divider {
+      width: 1px;
+      align-self: stretch;
+      background: var(--border);
+    }
+
+    /* Central dot */
+    .timeline-dot {
+      width: 10px;
+      height: 10px;
+      background: var(--text);
+      border-radius: 50%;
+      margin: 0 auto 32px;
+    }
+
+    .info-col h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      margin-bottom: 16px;
+      letter-spacing: 0.01em;
+    }
+    .info-col a, .info-col p, .info-col li {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+      list-style: none;
+    }
+    .info-col a {
+      color: var(--green);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .info-col a:hover { color: var(--green-dark); text-decoration: underline; }
+
+    /* ===========================
+       EXPERIENCE PANEL
+    =========================== */
+    .exp-section { margin-bottom: 48px; }
+
+    .exp-item {
+      margin-bottom: 36px;
+      padding-bottom: 36px;
+      border-bottom: 1px solid var(--border);
+    }
+    .exp-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 4px;
+      flex-wrap: wrap;
+    }
+    .exp-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--text);
+      flex: 1;
+    }
+    .exp-date {
+      font-size: 0.78rem;
+      border: 1px solid var(--border);
+      padding: 3px 10px;
+      border-radius: 3px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      font-weight: 500;
+    }
+    .exp-company {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--green);
+      margin-bottom: 10px;
+    }
+    .exp-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 8px;
+    }
+    .exp-desc em {
+      color: var(--text);
+      font-style: italic;
+    }
+
+    /* Tech tags */
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .tech-tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      padding: 2px 8px;
+      border-radius: 3px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* Sub-projects within a position */
+    .sub-projects { margin-top: 14px; }
+    .sub-project {
+      border-left: 3px solid var(--green);
+      padding: 12px 16px;
+      margin-bottom: 14px;
+      background: #fafafa;
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+    .sub-project-name {
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .sub-project-client {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      margin-bottom: 6px;
+    }
+    .sub-project-desc {
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+    .award-badge {
+      display: inline-block;
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      color: #856404;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 3px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    /* ===========================
+       EDUCATION PANEL
+    =========================== */
+    .edu-item {
+      margin-bottom: 32px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+    .edu-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .edu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 4px;
+    }
+    .edu-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 400;
+    }
+    .edu-institution {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--green);
+      margin-bottom: 8px;
+    }
+    .edu-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+    .edu-label {
+      font-size: 0.83rem;
+      color: var(--text);
+      font-weight: 600;
+      margin-top: 6px;
+    }
+    .edu-label span { font-weight: 400; color: var(--text-muted); }
+
+    /* Certs grid */
+    .certs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .cert-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      background: var(--white);
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+    .cert-card:hover {
+      box-shadow: 0 4px 16px rgba(46,184,126,0.12);
+      border-color: var(--green);
+    }
+    .cert-date {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--green);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+    .cert-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+      line-height: 1.4;
+    }
+    .cert-issuer {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* ===========================
+       SKILLS PANEL
+    =========================== */
+    .skills-group { margin-bottom: 40px; }
+    .skills-group-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--border);
+    }
+    .skill-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .skill-pill {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 50px;
+      padding: 6px 18px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text);
+      transition: all 0.2s;
+      cursor: default;
+    }
+    .skill-pill:hover {
+      border-color: var(--green);
+      color: var(--green);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(46,184,126,0.15);
+    }
+
+    /* Language bar */
+    .lang-item { margin-bottom: 20px; }
+    .lang-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      font-size: 0.85rem;
+    }
+    .lang-name { font-weight: 600; }
+    .lang-level { color: var(--text-muted); }
+    .lang-bar {
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .lang-bar-fill {
+      height: 100%;
+      background: var(--green);
+      border-radius: 2px;
+      transition: width 0.8s ease;
+    }
+
+    /* ===========================
+       PROJECTS PANEL
+    =========================== */
+    .project-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 20px;
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+    .project-card:hover {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      border-color: var(--green);
+    }
+    .project-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .project-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+    }
+    .project-meta {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      font-style: italic;
+    }
+    .project-desc {
+      font-size: 0.87rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+
+    /* ===========================
+       MOBILE HAMBURGER
+    =========================== */
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 12px;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* ===========================
+       FOOTER
+    =========================== */
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 0.78rem;
+      color: var(--text-light);
+    }
+
+    /* ===========================
+       RESPONSIVE
+    =========================== */
+    @media (max-width: 720px) {
+      :root { --sidebar-w: 100px; }
+
+      .panel { padding: 32px 20px 48px; }
+      .panel-title { font-size: 2rem; }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .info-divider { display: none; }
+
+      .nav-tabs {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: auto;
+      }
+
+      .exp-header { flex-direction: column; align-items: flex-start; }
+      .edu-header { flex-direction: column; }
+      .certs-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      :root { --sidebar-w: 80px; }
+
+      .header-inner { grid-template-columns: var(--sidebar-w) 1fr; }
+      .nav-tabs { grid-template-columns: repeat(2, 1fr); }
+      .nav-tab { font-size: 8px; }
+      .nav-tab .tab-icon { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===========================
+     STICKY HEADER
+=========================== -->
+<header id="site-header">
+  <div class="header-inner">
+    <!-- Profile photo -->
+    <div class="header-photo">
+      <img src="mia foto.jpg" alt="Profile photo" id="profile-photo" />
+    </div>
+
+    <!-- Navigation tabs -->
+    <nav class="nav-tabs" role="navigation" aria-label="Main navigation">
+      <button class="nav-tab active" data-target="panel-about" id="tab-about" aria-selected="true">
+        <span class="tab-icon">👤</span>
+        About
+      </button>
+      <button class="nav-tab" data-target="panel-projects" id="tab-projects" aria-selected="false">
+        <span class="tab-icon">🚀</span>
+        Projects
+      </button>
+      <button class="nav-tab" data-target="panel-education" id="tab-education" aria-selected="false">
+        <span class="tab-icon">🎓</span>
+        Education
+      </button>
+      <button class="nav-tab" data-target="panel-skills" id="tab-skills" aria-selected="false">
+        <span class="tab-icon">🛠️</span>
+        Skills
+      </button>
+
+      <button class="nav-tab" data-target="panel-contact" id="tab-contact" aria-selected="false">
+        <span class="tab-icon">✉️</span>
+        Contact
+      </button>
+    </nav>
+  </div>
+</header>
+
+<!-- ===========================
+     MAIN CONTENT
+=========================== -->
+<main>
+
+  <!-- ===== ABOUT ===== -->
+  <section class="panel active" id="panel-about" role="tabpanel">
+    <h1 class="hero-name">Salvatore Randazzo</h1>
+    <p class="hero-role">Junior Data Analyst &amp; AI Engineer · Rationence S.r.l.</p>
+
+    <p class="hero-quote">
+      DATA TELLS STORIES.<br />
+      THE CHALLENGE IS KNOWING WHICH QUESTIONS TO ASK.
+    </p>
+
+    <div class="section-label">
+      <span>Information</span>
+    </div>
+
+    <div class="timeline-dot"></div>
+
+    <div class="info-grid">
+      <div class="info-col">
+        <h3>Position</h3>
+        <p>Junior Data Analyst</p>
+        <p>Rationence S.r.l.</p>
+        <p>Via Arbe, 77 – 20125 Milano, Italy</p>
+        <br />
+        <h3>Nationality</h3>
+        <p>Italian</p>
+        <br />
+        <h3>Languages</h3>
+        <p>Italian (Native)</p>
+        <p>English (B2 – Intermediate)</p>
+      </div>
+
+      <div class="info-divider"></div>
+
+      <div class="info-col">
+        <h3>About Me</h3>
+        <p style="line-height: 1.8;">I am a dedicated professional with a solid background in Agricultural Engineering who has successfully transitioned into the world of software development. Over the past few years, I have channeled my engineering logic into mastering programming, with a strong focus on Python and database management. My innate curiosity and passion for innovation have led me to specialize in Artificial Intelligence and Machine Learning, fields where I have already contributed through several hands-on projects. I bring a fast-learning mindset and a proactive attitude to every challenge.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== EDUCATION ===== -->
+  <section class="panel" id="panel-education" role="tabpanel">
+    <h2 class="panel-title">Education</h2>
+
+    <div class="section-label"><span>Academic Background</span></div>
+
+    <div class="edu-item">
+      <div class="edu-header">
+        <div class="edu-title">Bachelor's Degree in Agro-ingegneria</div>
+        <div class="exp-date">Oct 2018 – Jan 2024 (Part Time)</div>
+      </div>
+      <div class="edu-institution">Università degli Studi di Palermo</div>
+      <p class="edu-desc">
+        Precision irrigation system design, hydrology, and meteorological trend forecasting. Advanced coursework in soil and water management, remote sensing applications, and environmental sustainability. Integration of engineering principles with agricultural sciences to optimise resource efficiency and crop yield. Training in GIS tools, data analysis, and predictive modelling for climate and irrigation planning.
+      </p>
+    </div>
+
+    <!-- Divider -->
+    <div class="section-label" style="margin-top: 40px;"><span>Certifications &amp; Courses</span></div>
+
+    <div class="certs-grid">
+
+      <div class="cert-card">
+        <div class="cert-date">Apr 2025</div>
+        <div class="cert-name">SAS Certified Associate: Programming Fundamentals Using SAS 9.4</div>
+        <div class="cert-issuer">SAS Institute</div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-date">Nov 2025</div>
+        <div class="cert-name">SAS Certified Specialist: Base Programming Using SAS 9.4</div>
+        <div class="cert-issuer">SAS Institute</div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-date">Nov 2025</div>
+        <div class="cert-name">SAS Certified Professional: Advanced Programming Using SAS 9.4</div>
+        <div class="cert-issuer">SAS Institute</div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-date">Dec 2024</div>
+        <div class="cert-name">Google Data Analytics Professional Certificate</div>
+        <div class="cert-issuer">Coursera · Google</div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-date">Sep 2024</div>
+        <div class="cert-name">Linux Essentials Certificate</div>
+        <div class="cert-issuer">CISCO</div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-date">Sep 2024</div>
+        <div class="cert-name">Cisco Networking Technician Career Path</div>
+        <div class="cert-issuer">CISCO</div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-date">Sep 2024</div>
+        <div class="cert-name">Junior Cybersecurity Analyst Career Path</div>
+        <div class="cert-issuer">CISCO</div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-date">Feb 2025 – Present</div>
+        <div class="cert-name">Internal Courses: SAS Base, Macro, Viya, Python, SQL, AI agents &amp; RAG</div>
+        <div class="cert-issuer">Rationence S.r.l.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== SKILLS ===== -->
+  <section class="panel" id="panel-skills" role="tabpanel">
+    <h2 class="panel-title">Skills</h2>
+
+    <div class="section-label"><span>Technical Competences</span></div>
+
+    <div class="skills-group">
+      <div class="skills-group-title">Programming &amp; Data</div>
+      <div class="skill-pills">
+        <span class="skill-pill">Python</span>
+        <span class="skill-pill">SAS</span>
+        <span class="skill-pill">SQL</span>
+        <span class="skill-pill">R</span>
+        <span class="skill-pill">SAS Macro</span>
+        <span class="skill-pill">SAS Viya</span>
+        <span class="skill-pill">SAS Visual Analytics</span>
+        <span class="skill-pill">SAS Visual Text Analytics</span>
+      </div>
+    </div>
+
+    <div class="skills-group">
+      <div class="skills-group-title">AI &amp; Machine Learning</div>
+      <div class="skill-pills">
+        <span class="skill-pill">Retrieval-Augmented Generation (RAG)</span>
+        <span class="skill-pill">Large Language Models (LLMs)</span>
+        <span class="skill-pill">Ollama</span>
+        <span class="skill-pill">SentenceTransformers</span>
+        <span class="skill-pill">ChromaDB</span>
+        <span class="skill-pill">OpenAI API</span>
+        <span class="skill-pill">YOLO / CNN</span>
+        <span class="skill-pill">Ultralytics</span>
+        <span class="skill-pill">AI Agent Design</span>
+      </div>
+    </div>
+
+    <div class="skills-group">
+      <div class="skills-group-title">Web &amp; Backend</div>
+      <div class="skill-pills">
+        <span class="skill-pill">FastAPI</span>
+        <span class="skill-pill">Streamlit</span>
+        <span class="skill-pill">JavaScript</span>
+        <span class="skill-pill">HTML / CSS</span>
+        <span class="skill-pill">REST APIs</span>
+        <span class="skill-pill">Server-Sent Events (SSE)</span>
+      </div>
+    </div>
+
+    <div class="skills-group">
+      <div class="skills-group-title">Infrastructure &amp; DevOps</div>
+      <div class="skill-pills">
+        <span class="skill-pill">Kubernetes</span>
+        <span class="skill-pill">Helm</span>
+        <span class="skill-pill">Linux</span>
+        <span class="skill-pill">VMware</span>
+        <span class="skill-pill">Linkerd</span>
+        <span class="skill-pill">Ingress-Nginx</span>
+        <span class="skill-pill">Contour</span>
+        <span class="skill-pill">NFS</span>
+        <span class="skill-pill">SAS RAM</span>
+      </div>
+    </div>
+
+    <div class="skills-group">
+      <div class="skills-group-title">Tools &amp; Productivity</div>
+      <div class="skill-pills">
+        <span class="skill-pill">Microsoft Office Suite</span>
+        <span class="skill-pill">Excel</span>
+        <span class="skill-pill">Google Sheets</span>
+        <span class="skill-pill">GIS Tools</span>
+        <span class="skill-pill">Pandas</span>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top: 40px;"><span>Languages</span></div>
+
+    <div class="lang-item">
+      <div class="lang-header">
+        <span class="lang-name">Italian</span>
+        <span class="lang-level">Native</span>
+      </div>
+      <div class="lang-bar"><div class="lang-bar-fill" style="width: 100%"></div></div>
+    </div>
+
+    <div class="lang-item">
+      <div class="lang-header">
+        <span class="lang-name">English</span>
+        <span class="lang-level">B2 – Intermediate User</span>
+      </div>
+      <div class="lang-bar"><div class="lang-bar-fill" style="width: 68%"></div></div>
+    </div>
+  </section>
+
+  <!-- ===== PROJECTS ===== -->
+  <section class="panel" id="panel-projects" role="tabpanel">
+    <h2 class="panel-title">Projects</h2>
+
+    <div class="section-label"><span>Selected Work</span></div>
+
+    <div class="project-card">
+      <div class="project-top">
+        <div class="project-name">VaultRAG</div>
+        <div class="project-meta">Mar 2026 – Present · Rationence S.r.l.</div>
+      </div>
+      <p class="project-desc">
+        A full-stack Retrieval-Augmented Generation system for the banking sector. Features include automated PDF ingestion, semantic chunking, vector search via ChromaDB, streaming LLM responses with source citations, and a responsive dashboard frontend. Runs entirely on-premise using Ollama for data privacy.
+      </p>
+      <div class="tech-tags">
+        <span class="tech-tag">Python</span><span class="tech-tag">FastAPI</span>
+        <span class="tech-tag">ChromaDB</span><span class="tech-tag">Ollama</span>
+        <span class="tech-tag">SentenceTransformers</span><span class="tech-tag">SSE</span>
+        <span class="tech-tag">JavaScript</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-top">
+        <div class="project-name">Chattino SQL</div>
+        <div class="project-meta">Mar 2025 – Sep 2025 · Rationence S.r.l.</div>
+      </div>
+      <p class="project-desc">
+        An AI assistant that converts natural language questions into optimised SQL queries. Supports CSV files and enterprise Oracle databases. Integrates schema-aware query construction, join management, and validation. Works with both cloud LLMs and local models for enterprise flexibility.
+      </p>
+      <div class="tech-tags">
+        <span class="tech-tag">Python</span><span class="tech-tag">Streamlit</span>
+        <span class="tech-tag">Oracle</span><span class="tech-tag">Generative AI</span><span class="tech-tag">SQL</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-top">
+        <div class="project-name">Breaking Barriers for Better Cities <span class="award-badge">🥇 UX Excellence – SAS Hackathon 2025</span></div>
+        <div class="project-meta">Jun 2025 – Oct 2025 · Rationence S.r.l.</div>
+      </div>
+      <p class="project-desc">
+        Computer vision pipeline using a YOLO-CNN model trained to detect architectural barriers in urban images. Paired with an interactive analytical dashboard that maps detected barriers geospatially, supporting city planners in prioritising accessibility interventions.
+      </p>
+      <div class="tech-tags">
+        <span class="tech-tag">Python</span><span class="tech-tag">YOLO</span>
+        <span class="tech-tag">Ultralytics</span><span class="tech-tag">Pandas</span>
+        <span class="tech-tag">SAS Viya 4</span><span class="tech-tag">SAS Visual Analytics</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-top">
+        <div class="project-name">Abstract Finder <span class="award-badge">🏆 SAS Hackathon 2024 – Life Sciences</span></div>
+        <div class="project-meta">May 2025 – Jul 2025 · Rationence S.r.l.</div>
+      </div>
+      <p class="project-desc">
+        Post-development optimisation of the SAS Hackathon 2024 winning project in the Life Sciences category. Focused on improving SAS Visual Analytics dashboards and integrating OpenAI-powered abstract analysis to enhance scientific literature discovery.
+      </p>
+      <div class="tech-tags">
+        <span class="tech-tag">Python</span><span class="tech-tag">OpenAI API</span>
+        <span class="tech-tag">SAS Visual Analytics</span><span class="tech-tag">SAS VTA</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-top">
+        <div class="project-name">Kubernetes Infrastructure &amp; SAS RAM</div>
+        <div class="project-meta">Mar 2026 – Present · Rationence S.r.l.</div>
+      </div>
+      <p class="project-desc">
+        End-to-end provisioning of a production-grade Kubernetes cluster on VMware, including NFS storage, Ingress routing (Nginx + Contour), Linkerd service mesh for mTLS, Kueue for job scheduling, and Helm-based deployment of the SAS Retrieval Agent Manager (RAM) application.
+      </p>
+      <div class="tech-tags">
+        <span class="tech-tag">Kubernetes</span><span class="tech-tag">Helm</span>
+        <span class="tech-tag">Linkerd</span><span class="tech-tag">Ingress-Nginx</span>
+        <span class="tech-tag">Contour</span><span class="tech-tag">NFS</span><span class="tech-tag">Linux</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section class="panel" id="panel-contact" role="tabpanel">
+    <h2 class="panel-title">Contact</h2>
+
+    <div class="section-label"><span>Get in Touch</span></div>
+
+    <div style="max-width: 480px; margin: 0 auto; text-align: center;">
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 40px; line-height: 1.8;">
+        Feel free to reach out for professional opportunities, collaborations, or just a chat about data, AI, or technology.
+      </p>
+
+      <div style="display: flex; flex-direction: column; gap: 16px; align-items: center;">
+        <a href="https://www.linkedin.com/in/salvatore-randazzo-5165b5289/" target="_blank" rel="noopener"
+           style="display: flex; align-items: center; gap: 12px; background: #0077b5; color: white;
+                  padding: 14px 32px; border-radius: 4px; text-decoration: none; font-weight: 600;
+                  font-size: 0.9rem; transition: opacity 0.2s; width: 260px; justify-content: center;"
+           id="linkedin-link">
+          <span>🔗</span> LinkedIn Profile
+        </a>
+
+        <a href="https://github.com/TheSr-Project" target="_blank" rel="noopener"
+           style="display: flex; align-items: center; gap: 12px; background: #1a1a1a; color: white;
+                  padding: 14px 32px; border-radius: 4px; text-decoration: none; font-weight: 600;
+                  font-size: 0.9rem; transition: opacity 0.2s; width: 260px; justify-content: center;"
+           id="github-link">
+          <span>💻</span> GitHub Profile
+        </a>
+      </div>
+
+      <p style="margin-top: 48px; font-size: 0.8rem; color: var(--text-light);">
+        📍 Milan, Italy &nbsp;·&nbsp; 🇮🇹 Italian / 🇬🇧 English (B2)
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>© <span id="year"></span> Salvatore Randazzo · Built with HTML, CSS &amp; JavaScript</p>
+</footer>
+
+<!-- ===========================
+     JAVASCRIPT
+=========================== -->
+<script>
+  // Tab navigation
+  const tabs = document.querySelectorAll('.nav-tab');
+  const panels = document.querySelectorAll('.panel');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.target;
+
+      // Update tabs
+      tabs.forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+
+      // Update panels
+      panels.forEach(p => p.classList.remove('active'));
+      const targetPanel = document.getElementById(target);
+      if (targetPanel) targetPanel.classList.add('active');
+
+      // Scroll to top of content on mobile
+      if (window.innerWidth < 720) {
+        window.scrollTo({ top: document.getElementById('site-header').offsetHeight - 10, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Current year in footer
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Animate language bars on panel reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.lang-bar-fill').forEach(bar => {
+          bar.style.width = bar.style.width; // trigger reflow
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+
+  const skillsPanel = document.getElementById('panel-skills');
+  if (skillsPanel) observer.observe(skillsPanel);
+
+  // Keyboard navigation for tabs
+  const tabList = Array.from(tabs);
+  tabList.forEach((tab, i) => {
+    tab.addEventListener('keydown', e => {
+      let next;
+      if (e.key === 'ArrowRight') next = tabList[(i + 1) % tabList.length];
+      if (e.key === 'ArrowLeft') next = tabList[(i - 1 + tabList.length) % tabList.length];
+      if (next) { next.focus(); next.click(); }
+    });
+  });
+</script>
+
+</body>
+</html>
