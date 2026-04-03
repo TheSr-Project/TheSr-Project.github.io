@@ -15,8 +15,9 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --green: #2eb87e;
-      --green-dark: #25a06d;
+      --green: #1abc9c;
+      --green-dark: #16a085;
+      --green-glow: rgba(26, 188, 156, 0.35);
       --bg: #e8e8e8;
       --white: #ffffff;
       --text: #1a1a1a;
@@ -78,7 +79,7 @@
     /* Nav tabs grid */
     .nav-tabs {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       grid-template-rows: 1fr 1fr;
     }
 
@@ -104,13 +105,12 @@
       text-decoration: none;
       line-height: 1.2;
     }
-    .nav-tab:last-child,
-    .nav-tab:nth-child(4) { border-right: none; }
-
-    /* Only 2 tabs in second row → span last 2 cols */
-    .nav-tab.row2-3 { grid-column: 3; }
-    .nav-tab.row2-4 { grid-column: 4; }
-    .nav-tab.row2 { display: none; } /* hide empty */
+    /* Remove right border on last col of each row */
+    .nav-tab:nth-child(3),
+    .nav-tab:nth-child(5) { border-right: none; }
+    /* Remove bottom border on last row */
+    .nav-tab:nth-child(4),
+    .nav-tab:nth-child(5) { border-bottom: none; }
 
     .nav-tab .tab-icon {
       font-size: 20px;
@@ -153,7 +153,11 @@
       background: var(--white);
       margin-top: 24px;
       padding: 56px 64px 72px;
-      box-shadow: var(--shadow);
+      border-bottom: 5px solid var(--green);
+      box-shadow:
+        0 2px 8px rgba(0,0,0,0.07),
+        0 8px 0 -3px var(--green-dark),
+        0 12px 16px -4px var(--green-glow);
       animation: fadeIn 0.35s ease;
     }
     .panel.active { display: block; }
@@ -608,8 +612,6 @@
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: auto;
       }
-      .nav-tab.row2-3,
-      .nav-tab.row2-4 { grid-column: auto; }
 
       .exp-header { flex-direction: column; align-items: flex-start; }
       .edu-header { flex-direction: column; }
@@ -644,9 +646,9 @@
         <span class="tab-icon">👤</span>
         About
       </button>
-      <button class="nav-tab" data-target="panel-experience" id="tab-experience" aria-selected="false">
-        <span class="tab-icon">💼</span>
-        Experience
+      <button class="nav-tab" data-target="panel-projects" id="tab-projects" aria-selected="false">
+        <span class="tab-icon">🚀</span>
+        Projects
       </button>
       <button class="nav-tab" data-target="panel-education" id="tab-education" aria-selected="false">
         <span class="tab-icon">🎓</span>
@@ -656,11 +658,8 @@
         <span class="tab-icon">🛠️</span>
         Skills
       </button>
-      <button class="nav-tab row2-3" data-target="panel-projects" id="tab-projects" aria-selected="false">
-        <span class="tab-icon">🚀</span>
-        Projects
-      </button>
-      <button class="nav-tab row2-4" data-target="panel-contact" id="tab-contact" aria-selected="false">
+
+      <button class="nav-tab" data-target="panel-contact" id="tab-contact" aria-selected="false">
         <span class="tab-icon">✉️</span>
         Contact
       </button>
@@ -707,131 +706,12 @@
       <div class="info-divider"></div>
 
       <div class="info-col">
-        <h3>Links</h3>
-        <ul>
-          <li><a href="https://www.linkedin.com/in/salvatore-randazzo-5165b5289/" target="_blank" rel="noopener">LinkedIn</a></li>
-          <li><a href="https://github.com/TheSr-Project" target="_blank" rel="noopener">GitHub</a></li>
-        </ul>
-        <br />
-        <h3>Certifications</h3>
-        <ul>
-          <li><p>SAS Certified Associate (Apr 2025)</p></li>
-          <li><p>SAS Certified Specialist (Nov 2025)</p></li>
-          <li><p>SAS Certified Professional (Nov 2025)</p></li>
-          <li><p>Google Data Analytics (Dec 2024)</p></li>
-          <li><p>Linux Essentials – CISCO (Sep 2024)</p></li>
-        </ul>
+        <h3>About Me</h3>
+        <p style="line-height: 1.8;">I am a dedicated professional with a solid background in Agricultural Engineering who has successfully transitioned into the world of software development. Over the past few years, I have channeled my engineering logic into mastering programming, with a strong focus on Python and database management. My innate curiosity and passion for innovation have led me to specialize in Artificial Intelligence and Machine Learning, fields where I have already contributed through several hands-on projects. I bring a fast-learning mindset and a proactive attitude to every challenge.</p>
       </div>
     </div>
   </section>
 
-  <!-- ===== EXPERIENCE ===== -->
-  <section class="panel" id="panel-experience" role="tabpanel">
-    <h2 class="panel-title">Experience</h2>
-
-    <div class="section-label"><span>Work History</span></div>
-
-    <!-- Job 1 -->
-    <div class="exp-item">
-      <div class="exp-header">
-        <div class="exp-title">Junior Data Analyst</div>
-        <div class="exp-date">Feb 2025 – Present</div>
-      </div>
-      <div class="exp-company">Rationence S.r.l. · Business Intelligence &amp; Analytics · Milano</div>
-      <p class="exp-desc">
-        Working in a consultancy firm specialised in Business Intelligence and Analytics. Involved in multiple internal R&amp;D and client projects, ranging from AI-powered data tools to computer vision pipelines.
-      </p>
-
-      <div class="sub-projects">
-
-        <div class="sub-project">
-          <div class="sub-project-name">
-            Abstract Finder
-            <span class="award-badge">🏆 SAS Hackathon 2024 Winner – Life Sciences</span>
-          </div>
-          <div class="sub-project-client">Internal Project · May 2025 – Jul 2025</div>
-          <div class="sub-project-desc">
-            Contributed post-development enhancements and code optimizations with a focus on SAS Visual Analytics. Supported the evolution of the solution to improve usability and performance, ensuring smoother integration with the overall system.
-          </div>
-          <div class="tech-tags">
-            <span class="tech-tag">Python</span><span class="tech-tag">OpenAI API</span>
-            <span class="tech-tag">SAS Visual Analytics</span><span class="tech-tag">SAS Visual Text Analytics</span>
-          </div>
-        </div>
-
-        <div class="sub-project">
-          <div class="sub-project-name">Chattino SQL – NL-to-SQL AI Assistant</div>
-          <div class="sub-project-client">Internal Project · Mar 2025 – Sep 2025</div>
-          <div class="sub-project-desc">
-            Designed and implemented an intelligent assistant capable of transforming natural language queries into executable SQL code. Initially developed for CSV files, extended to support enterprise Oracle databases. Leveraged generative AI for automated SQL translation, table schema extraction, join management, and query validation. Supports both cloud APIs and local LLMs.
-          </div>
-          <div class="tech-tags">
-            <span class="tech-tag">Python</span><span class="tech-tag">Streamlit</span>
-            <span class="tech-tag">Oracle</span><span class="tech-tag">Generative AI</span><span class="tech-tag">SQL</span>
-          </div>
-        </div>
-
-        <div class="sub-project">
-          <div class="sub-project-name">
-            Breaking Barriers for Better Cities
-            <span class="award-badge">🥇 SAS Hackathon 2025 – UX Excellence</span>
-          </div>
-          <div class="sub-project-client">R&amp;D Project · Jun 2025 – Oct 2025</div>
-          <div class="sub-project-desc">
-            Implementation and training of a YOLO-CNN convolutional neural network for recognising architectural barriers in images. Development of an analytical dashboard with an interactive map to visualise points of interest and support urban accessibility planning.
-          </div>
-          <div class="tech-tags">
-            <span class="tech-tag">Python</span><span class="tech-tag">Ultralytics</span>
-            <span class="tech-tag">Pandas</span><span class="tech-tag">SAS Viya 4</span><span class="tech-tag">SAS Visual Analytics</span>
-          </div>
-        </div>
-
-        <div class="sub-project">
-          <div class="sub-project-name">VaultRAG – Banking RAG System</div>
-          <div class="sub-project-client">R&amp;D Project · Mar 2026 – Present</div>
-          <div class="sub-project-desc">
-            Designed and developed a Retrieval-Augmented Generation (RAG) system tailored for the banking sector, enabling secure and intelligent querying of financial and corporate documents. Engineered a custom document ingestion pipeline with automated PDF chunking, metadata extraction, and vectorisation using ChromaDB. Implemented a FastAPI backend supporting global corporate databases and user-specific sessions. Leveraged local LLMs via Ollama and SentenceTransformers for data privacy. Built a responsive frontend with SSE streaming and source citation tracking.
-          </div>
-          <div class="tech-tags">
-            <span class="tech-tag">Python</span><span class="tech-tag">FastAPI</span>
-            <span class="tech-tag">ChromaDB</span><span class="tech-tag">Ollama</span>
-            <span class="tech-tag">SentenceTransformers</span><span class="tech-tag">JavaScript</span><span class="tech-tag">HTML/CSS</span>
-          </div>
-        </div>
-
-        <div class="sub-project">
-          <div class="sub-project-name">Kubernetes Infrastructure &amp; SAS RAM Deployment</div>
-          <div class="sub-project-client">Internal Project · Mar 2026 – Present</div>
-          <div class="sub-project-desc">
-            Provisioned and configured a multi-node Kubernetes cluster on VMware. Set up NFS shared storage across worker nodes and managed inbound traffic routing via Ingress Nginx and Contour. Installed Linkerd service mesh for secure internal mTLS communications. Deployed Kubernetes Kueue for cluster resource management. Executed complex deployment of SAS Retrieval Agent Manager (RAM) via Helm.
-          </div>
-          <div class="tech-tags">
-            <span class="tech-tag">Kubernetes</span><span class="tech-tag">VMware</span>
-            <span class="tech-tag">Helm</span><span class="tech-tag">Linkerd</span>
-            <span class="tech-tag">NFS</span><span class="tech-tag">Linux</span><span class="tech-tag">SAS RAM</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Job 2 -->
-    <div class="exp-item">
-      <div class="exp-header">
-        <div class="exp-title">Back Office Assistant</div>
-        <div class="exp-date">Dec 2023 – Jun 2024</div>
-      </div>
-      <div class="exp-company">We Can Consulting S.p.A. · Palermo, PA</div>
-      <ul style="padding-left: 18px; margin-top: 8px;">
-        <li class="exp-desc">Managing customer interactions, providing support, and addressing inquiries.</li>
-        <li class="exp-desc">Handling entry and processing of customer requests through dedicated company portals.</li>
-        <li class="exp-desc">Verifying and updating customer data ensuring accuracy and compliance.</li>
-        <li class="exp-desc">Coordinating with internal departments for customer issue resolution.</li>
-        <li class="exp-desc">Monitoring and maintaining records of customer interactions for reporting purposes.</li>
-      </ul>
-    </div>
-
-  </section>
 
   <!-- ===== EDUCATION ===== -->
   <section class="panel" id="panel-education" role="tabpanel">
