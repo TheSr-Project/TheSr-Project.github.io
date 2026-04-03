@@ -4,10 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Salvatore Randazzo – Junior Data Analyst & AI Engineer | SAS, Python, AI & RAG Systems" />
-  <title>Salvatore Randazzo – Junior Data Analyst & AI Engineer</title>
+  <title>Salvatore Randazzo – Junior Data Analyst/Scientist & AI Engineer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <!-- Font Awesome 6 Free (Solid + Brands) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     /* ===========================
        RESET & BASE
@@ -50,7 +52,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: var(--white);
+      background: var(--bg);
       box-shadow: 0 1px 6px rgba(0,0,0,0.12);
     }
 
@@ -59,6 +61,7 @@
       margin: 0 auto;
       display: grid;
       grid-template-columns: var(--sidebar-w) 1fr;
+      background: var(--white);
     }
 
     /* Photo block */
@@ -113,8 +116,12 @@
     .nav-tab:nth-child(5) { border-bottom: none; }
 
     .nav-tab .tab-icon {
-      font-size: 20px;
+      font-size: 18px;
       line-height: 1;
+      color: var(--text);
+    }
+    .nav-tab.active .tab-icon {
+      color: var(--white);
     }
 
     .nav-tab:hover { background: #f5f5f5; }
@@ -596,6 +603,29 @@
     /* ===========================
        RESPONSIVE
     =========================== */
+    @media (max-width: 768px) {
+      /* Fix 1: header diventa statico su mobile – non occupa spazio permanente */
+      #site-header {
+        position: static;
+        box-shadow: 0 1px 6px rgba(0,0,0,0.12);
+      }
+
+      /* Fix 2: niente scroll-snap né effetti parallax su mobile */
+      html, body {
+        scroll-snap-type: none !important;
+        overflow-x: hidden;
+      }
+      * {
+        scroll-snap-align: none !important;
+        scroll-snap-stop: normal !important;
+      }
+      /* Rimuovi transform 3D che possono causare jank */
+      .panel {
+        transform: none !important;
+        animation: fadeIn 0.2s ease;
+      }
+    }
+
     @media (max-width: 720px) {
       :root { --sidebar-w: 100px; }
 
@@ -624,7 +654,7 @@
       .header-inner { grid-template-columns: var(--sidebar-w) 1fr; }
       .nav-tabs { grid-template-columns: repeat(2, 1fr); }
       .nav-tab { font-size: 8px; }
-      .nav-tab .tab-icon { font-size: 16px; }
+      .nav-tab .tab-icon { font-size: 14px; }
     }
   </style>
 </head>
@@ -643,24 +673,24 @@
     <!-- Navigation tabs -->
     <nav class="nav-tabs" role="navigation" aria-label="Main navigation">
       <button class="nav-tab active" data-target="panel-about" id="tab-about" aria-selected="true">
-        <span class="tab-icon">👤</span>
+        <i class="fa-solid fa-user tab-icon"></i>
         About
       </button>
       <button class="nav-tab" data-target="panel-projects" id="tab-projects" aria-selected="false">
-        <span class="tab-icon">🚀</span>
+        <i class="fa-solid fa-rocket tab-icon"></i>
         Projects
       </button>
       <button class="nav-tab" data-target="panel-education" id="tab-education" aria-selected="false">
-        <span class="tab-icon">🎓</span>
+        <i class="fa-solid fa-graduation-cap tab-icon"></i>
         Education
       </button>
       <button class="nav-tab" data-target="panel-skills" id="tab-skills" aria-selected="false">
-        <span class="tab-icon">🛠️</span>
+        <i class="fa-solid fa-wrench tab-icon"></i>
         Skills
       </button>
 
       <button class="nav-tab" data-target="panel-contact" id="tab-contact" aria-selected="false">
-        <span class="tab-icon">✉️</span>
+        <i class="fa-solid fa-envelope tab-icon"></i>
         Contact
       </button>
     </nav>
@@ -675,7 +705,7 @@
   <!-- ===== ABOUT ===== -->
   <section class="panel active" id="panel-about" role="tabpanel">
     <h1 class="hero-name">Salvatore Randazzo</h1>
-    <p class="hero-role">Junior Data Analyst &amp; AI Engineer · Rationence S.r.l.</p>
+    <p class="hero-role">Junior Data Analyst/Scientist</p>
 
     <p class="hero-quote">
       DATA TELLS STORIES.<br />
@@ -683,7 +713,7 @@
     </p>
 
     <div class="section-label">
-      <span>Information</span>
+      <span>Informations</span>
     </div>
 
     <div class="timeline-dot"></div>
@@ -707,7 +737,7 @@
 
       <div class="info-col">
         <h3>About Me</h3>
-        <p style="line-height: 1.8;">I am a dedicated professional with a solid background in Agricultural Engineering who has successfully transitioned into the world of software development. Over the past few years, I have channeled my engineering logic into mastering programming, with a strong focus on Python and database management. My innate curiosity and passion for innovation have led me to specialize in Artificial Intelligence and Machine Learning, fields where I have already contributed through several hands-on projects. I bring a fast-learning mindset and a proactive attitude to every challenge.</p>
+        <p style="line-height: 1.8;">I am a dedicated professional with a solid background in Agricultural Engineering who has successfully transitioned into the world of software development. Over the past few years, I have channeled my engineering logic into mastering programming, with a strong focus on Python and database management. <br>My innate curiosity and passion for innovation have led me to specialize in Artificial Intelligence and Machine Learning, fields where I have already contributed through several hands-on projects. I bring a fast-learning mindset and a proactive attitude to every challenge.</p>
       </div>
     </div>
   </section>
@@ -859,23 +889,23 @@
       </div>
     </div>
 
-    <div class="section-label" style="margin-top: 40px;"><span>Languages</span></div>
+    <!-- <div class="section-label" style="margin-top: 40px;"><span>Languages</span></div> -->
 
-    <div class="lang-item">
-      <div class="lang-header">
-        <span class="lang-name">Italian</span>
-        <span class="lang-level">Native</span>
-      </div>
-      <div class="lang-bar"><div class="lang-bar-fill" style="width: 100%"></div></div>
-    </div>
+    <!-- <div class="lang-item"> -->
+      <!-- <div class="lang-header"> -->
+        <!-- <span class="lang-name">Italian</span> -->
+        <!-- <span class="lang-level">Native</span> -->
+      <!-- </div> -->
+      <!-- <div class="lang-bar"><div class="lang-bar-fill" style="width: 100%"></div></div> -->
+    <!-- </div> -->
 
-    <div class="lang-item">
-      <div class="lang-header">
-        <span class="lang-name">English</span>
-        <span class="lang-level">B2 – Intermediate User</span>
-      </div>
-      <div class="lang-bar"><div class="lang-bar-fill" style="width: 68%"></div></div>
-    </div>
+    <!-- <div class="lang-item"> -->
+      <!-- <div class="lang-header"> -->
+        <!-- <span class="lang-name">English</span> -->
+        <!-- <span class="lang-level">B2 – Intermediate User</span> -->
+      <!-- </div> -->
+      <!-- <div class="lang-bar"><div class="lang-bar-fill" style="width: 68%"></div></div> -->
+    <!-- </div> -->
   </section>
 
   <!-- ===== PROJECTS ===== -->
@@ -916,7 +946,7 @@
 
     <div class="project-card">
       <div class="project-top">
-        <div class="project-name">Breaking Barriers for Better Cities <span class="award-badge">🥇 UX Excellence – SAS Hackathon 2025</span></div>
+        <div class="project-name">Breaking Barriers for Better Cities <span class="award-badge"><i class="fa-solid fa-medal"></i> UX Excellence – SAS Hackathon 2025</span></div>
         <div class="project-meta">Jun 2025 – Oct 2025 · Rationence S.r.l.</div>
       </div>
       <p class="project-desc">
@@ -931,7 +961,7 @@
 
     <div class="project-card">
       <div class="project-top">
-        <div class="project-name">Abstract Finder <span class="award-badge">🏆 SAS Hackathon 2024 – Life Sciences</span></div>
+        <div class="project-name">Abstract Finder <span class="award-badge"><i class="fa-solid fa-trophy"></i> SAS Hackathon 2024 – Life Sciences</span></div>
         <div class="project-meta">May 2025 – Jul 2025 · Rationence S.r.l.</div>
       </div>
       <p class="project-desc">
@@ -976,7 +1006,7 @@
                   padding: 14px 32px; border-radius: 4px; text-decoration: none; font-weight: 600;
                   font-size: 0.9rem; transition: opacity 0.2s; width: 260px; justify-content: center;"
            id="linkedin-link">
-          <span>🔗</span> LinkedIn Profile
+          <i class="fa-brands fa-linkedin"></i> LinkedIn Profile
         </a>
 
         <a href="https://github.com/TheSr-Project" target="_blank" rel="noopener"
@@ -984,12 +1014,13 @@
                   padding: 14px 32px; border-radius: 4px; text-decoration: none; font-weight: 600;
                   font-size: 0.9rem; transition: opacity 0.2s; width: 260px; justify-content: center;"
            id="github-link">
-          <span>💻</span> GitHub Profile
+          <i class="fa-brands fa-github"></i> GitHub Profile
         </a>
       </div>
 
       <p style="margin-top: 48px; font-size: 0.8rem; color: var(--text-light);">
-        📍 Milan, Italy &nbsp;·&nbsp; 🇮🇹 Italian / 🇬🇧 English (B2)
+        <i class="fa-solid fa-location-dot"></i> Milan, Italy &nbsp;·&nbsp;
+        
       </p>
     </div>
   </section>
